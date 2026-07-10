@@ -15,3 +15,5 @@ if (ini_get('session.use_cookies')) {
         $params['httponly']
     );
 }
+
+session_destroy();
