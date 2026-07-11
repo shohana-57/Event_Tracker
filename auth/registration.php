@@ -1,3 +1,33 @@
+<?php
+session_start();
+require_once __DIR__ . '/../config/db.php'; 
+
+if (!empty($_SESSION['user_id'])) {
+    header('Location: ../dashboard.php');
+    exit;
+}
+
+if ($name === '') {
+    $errors[] = 'Name is required.';
+}
+
+if ($email === '') {
+    $errors[] = 'Email is required.';
+} elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    $errors[] = 'Please enter a valid email address.';
+}
+
+if ($password === '') {
+    $errors[] = 'Password is required.';
+} elseif (strlen($password) < 6) {
+    $errors[] = 'Password must be at least 6 characters long.';
+}
+
+if ($password !== $confirmPassword) {
+    $errors[] = 'Passwords do not match.';
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
