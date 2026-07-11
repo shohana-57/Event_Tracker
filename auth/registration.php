@@ -40,7 +40,19 @@ if (empty($errors)) {
         error_log('Register lookup error: ' . $e->getMessage());
     }
 }
+if (empty($errors)) {
+    try {
+        $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
+        $stmt = $pdo->prepare(
+            'INSERT INTO users (name, email, password_hash, created_at)
+             VALUES (?, ?, ?, NOW())'
+        );
+
+        $stmt->execute([$name, $email, $passwordHash]);
+
+        $userId = $pdo->lastInsertId();
+        
 ?>
 <!DOCTYPE html>
 <html lang="en">
