@@ -17,7 +17,10 @@
     <h1>Dashboard</h1>
 
     <section class="dashboard-stats">
-
+     <div class="stat-card">
+      <span class="stat-number">0</span>
+      <span class="stat-label">Total Events</span>
+     </div>
     </section>
 </main>
 
