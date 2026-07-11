@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 require_once __DIR__ . '/../config/db.php'; 
 
@@ -7,52 +8,77 @@ if (!empty($_SESSION['user_id'])) {
     exit;
 }
 
-if ($name === '') {
-    $errors[] = 'Name is required.';
-}
+$errors = [];
+$name = '';
+$email = '';
 
-if ($email === '') {
-    $errors[] = 'Email is required.';
-} elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    $errors[] = 'Please enter a valid email address.';
-}
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $name = trim($_POST['name'] ?? '');
+    $email = trim($_POST['email'] ?? '');
+    $password = $_POST['password'] ?? '';
+    $confirmPassword = $_POST['confirm_password'] ?? '';
 
-if ($password === '') {
-    $errors[] = 'Password is required.';
-} elseif (strlen($password) < 6) {
-    $errors[] = 'Password must be at least 6 characters long.';
-}
+    // Validation
+    if ($name === '') {
+        $errors[] = 'Name is required.';
+    }
 
-if ($password !== $confirmPassword) {
-    $errors[] = 'Passwords do not match.';
-}
+    if ($email === '') {
+        $errors[] = 'Email is required.';
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errors[] = 'Please enter a valid email address.';
+    }
 
-if (empty($errors)) {
-    try {
-        $stmt = $pdo->prepare('SELECT id FROM users WHERE email = ? LIMIT 1');
-        $stmt->execute([$email]);
+    if ($password === '') {
+        $errors[] = 'Password is required.';
+    } elseif (strlen($password) < 6) {
+        $errors[] = 'Password must be at least 6 characters long.';
+    }
 
-        if ($stmt->fetch()) {
-            $errors[] = 'An account with this email already exists.';
+    if ($password !== $confirmPassword) {
+        $errors[] = 'Passwords do not match.';
+    }
+
+    // Check for duplicate email
+    if (empty($errors)) {
+        try {
+            $stmt = $pdo->prepare('SELECT id FROM users WHERE email = ? LIMIT 1');
+            $stmt->execute([$email]);
+            if ($stmt->fetch()) {
+                $errors[] = 'An account with this email already exists.';
+            }
+        } catch (PDOException $e) {
+            $errors[] = 'Something went wrong. Please try again later.';
+            error_log('Register lookup error: ' . $e->getMessage());
         }
-    } catch (PDOException $e) {
-        $errors[] = 'Something went wrong. Please try again later.';
-        error_log('Register lookup error: ' . $e->getMessage());
+    }
+
+    // Create the account
+    if (empty($errors)) {
+        try {
+            $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+
+            $stmt = $pdo->prepare(
+                'INSERT INTO users (name, email, password_hash, created_at) VALUES (?, ?, ?, NOW())'
+            );
+            $stmt->execute([$name, $email, $passwordHash]);
+
+            $userId = $pdo->lastInsertId();
+
+            // Log the new user straight in
+            session_regenerate_id(true);
+            $_SESSION['user_id'] = $userId;
+            $_SESSION['user_name'] = $name;
+            $_SESSION['user_email'] = $email;
+
+            header('Location: ../dashboard.php');
+            exit;
+        } catch (PDOException $e) {
+            $errors[] = 'Could not create account. Please try again later.';
+            error_log('Register insert error: ' . $e->getMessage());
+        }
     }
 }
-if (empty($errors)) {
-    try {
-        $passwordHash = password_hash($password, PASSWORD_DEFAULT);
-
-        $stmt = $pdo->prepare(
-            'INSERT INTO users (name, email, password_hash, created_at)
-             VALUES (?, ?, ?, NOW())'
-        );
-
-        $stmt->execute([$name, $email, $passwordHash]);
-
-        $userId = $pdo->lastInsertId();
-        
 ?>
 <!DOCTYPE html>
 <html lang="en">
