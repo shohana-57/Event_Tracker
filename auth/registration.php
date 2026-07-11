@@ -27,6 +27,20 @@ if ($password !== $confirmPassword) {
     $errors[] = 'Passwords do not match.';
 }
 
+if (empty($errors)) {
+    try {
+        $stmt = $pdo->prepare('SELECT id FROM users WHERE email = ? LIMIT 1');
+        $stmt->execute([$email]);
+
+        if ($stmt->fetch()) {
+            $errors[] = 'An account with this email already exists.';
+        }
+    } catch (PDOException $e) {
+        $errors[] = 'Something went wrong. Please try again later.';
+        error_log('Register lookup error: ' . $e->getMessage());
+    }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
