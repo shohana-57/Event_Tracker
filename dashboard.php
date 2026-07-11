@@ -13,7 +13,13 @@
 </head>
 <body>
 
-<h1>Dashboard</h1>
+<main class="dashboard">
+    <h1>Dashboard</h1>
+
+    <section class="dashboard-stats">
+
+    </section>
+</main>
 
 </body>
 </html>
