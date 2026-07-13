@@ -40,7 +40,7 @@ $currentUserName = $_SESSION['user_name'] ?? '';
                 <a href="<?php echo BASE_URL; ?>/auth/logout.php" class="nav-logout">Logout</a>
             <?php else: ?>
                 <a href="<?php echo BASE_URL; ?>/auth/login.php">Login</a>
-                <a href="<?php echo BASE_URL; ?>/auth/register.php">Register</a>
+                <a href="<?php echo BASE_URL; ?>/auth/registration.php">Register</a>
             <?php endif; ?>
         </nav>
     </div>
