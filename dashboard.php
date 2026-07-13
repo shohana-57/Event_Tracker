@@ -47,83 +47,70 @@ require_once __DIR__ . '/includes/header.php';
 // Dashboard page
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
 
-    <link rel="stylesheet" href="assets/style.css">
-</head>
-<body>
+<h1>Dashboard</h1>
+<p>Welcome back, <?php echo htmlspecialchars($_SESSION['user_name']); ?>.</p>
 
-<main class="dashboard">
-
-    <div class="dashboard-header">
-        <div>
-            <h1>Dashboard</h1>
-            <p>Welcome back, User.</p>
-        </div>
+<section class="dashboard-stats">
+    <div class="stat-card">
+        <span class="stat-number"><?php echo $totalEvents; ?></span>
+        <span class="stat-label">Total Events</span>
     </div>
-
-    <section class="dashboard-stats">
-
-        <div class="stat-card">
-            <span class="stat-number">12</span>
-            <span class="stat-label">Total Events</span>
-        </div>
-
-        <div class="stat-card">
-            <span class="stat-number">5</span>
-            <span class="stat-label">Upcoming</span>
-        </div>
-
-        <div class="stat-card">
-            <span class="stat-number">7</span>
-            <span class="stat-label">Past</span>
-        </div>
-
-    </section>
-
-    <section class="dashboard-section">
-        <h2>Next Up</h2>
-
-        <ul class="event-summary-list">
-            <li>
-                <strong>Department Meeting</strong><br>
-                <small>15 Jul 2026 • Conference Room</small>
-            </li>
-
-            <li>
-                <strong>Project Presentation</strong><br>
-                <small>18 Jul 2026 • Lab 402</small>
-            </li>
-        </ul>
-    </section>
-
-    <section class="dashboard-section">
-        <h2>Recently Added</h2>
-
-        <ul class="event-summary-list">
-            <li>
-                <strong>Hackathon Registration</strong><br>
-                <small>10 Jul 2026</small>
-            </li>
-
-            <li>
-                <strong>Club Orientation</strong><br>
-                <small>08 Jul 2026</small>
-            </li>
-        </ul>
-    </section>
-
-    <div class="dashboard-actions">
-        <a href="#" class="btn btn-secondary">View All Events</a>
-        <a href="#" class="btn btn-primary">+ New Event</a>
+    <div class="stat-card">
+        <span class="stat-number"><?php echo $upcomingCount; ?></span>
+        <span class="stat-label">Upcoming</span>
     </div>
+    <div class="stat-card">
+        <span class="stat-number"><?php echo $pastCount; ?></span>
+        <span class="stat-label">Past</span>
+    </div>
+</section>
 
-</main>
+<section class="dashboard-section">
+    <h2>Next Up</h2>
+    <?php if (empty($upcomingEvents)): ?>
+        <p class="empty-state">No upcoming events. <a href="events/create.php">Create one</a>.</p>
+    <?php else: ?>
+        <ul class="event-summary-list">
+            <?php foreach ($upcomingEvents as $event): ?>
+                <li>
+                    <a href="events/view.php?id=<?php echo (int) $event['id']; ?>">
+                        <?php echo htmlspecialchars($event['title']); ?>
+                    </a>
+                    <span class="event-meta">
+                        <?php echo date('d M Y', strtotime($event['event_date'])); ?>
+                        <?php if (!empty($event['location'])): ?>
+                            &middot; <?php echo htmlspecialchars($event['location']); ?>
+                        <?php endif; ?>
+                    </span>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    <?php endif; ?>
+</section>
 
-</body>
-</html>
+<section class="dashboard-section">
+    <h2>Recently Added</h2>
+    <?php if (empty($recentlyAdded)): ?>
+        <p class="empty-state">You haven't added any events yet.</p>
+    <?php else: ?>
+        <ul class="event-summary-list">
+            <?php foreach ($recentlyAdded as $event): ?>
+                <li>
+                    <a href="events/view.php?id=<?php echo (int) $event['id']; ?>">
+                        <?php echo htmlspecialchars($event['title']); ?>
+                    </a>
+                    <span class="event-meta">
+                        <?php echo date('d M Y', strtotime($event['event_date'])); ?>
+                    </span>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    <?php endif; ?>
+</section>
+
+
+<a href="events/list.php" class="btn btn-secondary">View All Events</a>
+<a href="events/create.php" class="btn btn-primary">+ New Event</a>
+
+<?php require_once __DIR__ . '/includes/footer.php'; ?>
