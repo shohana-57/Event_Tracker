@@ -92,17 +92,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <h1>Even Tracker</h1>
         <h2>Create an Account</h2>
 
-        <form>
+        <?php if (!empty($errors)): ?>
+            <div class="alert alert-error">
+                <?php foreach ($errors as $error): ?>
+                    <p><?php echo htmlspecialchars($error); ?></p>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
+
+        <form method="POST" action="register.php" novalidate>
             <div class="form-group">
                 <label for="name">Full Name</label>
                 <input type="text" id="name" name="name"
-                       value="name" required autofocus>
+                       value="<?php echo htmlspecialchars($name); ?>" required autofocus>
             </div>
 
             <div class="form-group">
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email"
-                       value="email" required>
+                       value="<?php echo htmlspecialchars($email); ?>" required>
             </div>
 
             <div class="form-group">
@@ -123,5 +131,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </p>
     </div>
 
+    <script src="../assets/js/validate.js"></script>
 </body>
 </html>
