@@ -14,8 +14,12 @@
 <body>
 
 <main class="dashboard">
-    <h1>Dashboard</h1>
-    <p>Welcome back, User.</p>
+   <div class="dashboard-header">
+    <div>
+        <h1>Dashboard</h1>
+        <p>Welcome back, User.</p>
+    </div>
+   </div>
     <section class="dashboard-stats">
      <div class="stat-card">
         <span class="stat-number">0</span>
@@ -35,16 +39,16 @@
     <section class="dashboard-section">
      <h2>Next Up</h2>
 
-     <p class="empty-state">
-        No upcoming events.
-     </p>
+     <ul class="event-summary-list">
+       <li>No upcoming events.</li>
+     </ul>
     </section>
     <section class="dashboard-section">
     <h2>Recently Added</h2>
 
-    <p class="empty-state">
-        You haven't added any events yet.
-    </p>
+    <ul class="event-summary-list">
+      <li>You haven't added any events yet.</li>
+    </ul>
 </section>
 <div class="dashboard-actions">
     <a href="#" class="btn btn-secondary">View All Events</a>
