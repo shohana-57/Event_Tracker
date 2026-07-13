@@ -31,6 +31,13 @@
         <span class="stat-label">Past</span>
      </div>
     </section>
+    <section class="dashboard-section">
+     <h2>Next Up</h2>
+
+     <p class="empty-state">
+        No upcoming events.
+     </p>
+    </section>
 </main>
 
 </body>
