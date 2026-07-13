@@ -10,7 +10,7 @@ $totalStmt = $pdo->prepare('SELECT COUNT(*) FROM events WHERE user_id = ?');
 $totalStmt->execute([$userId]);
 $totalEvents = (int) $totalStmt->fetchColumn();
 
-// Upcoming events
+// Upcoming events (today or later)
 $upcomingStmt = $pdo->prepare('SELECT COUNT(*) FROM events WHERE user_id = ? AND event_date >= CURDATE()');
 $upcomingStmt->execute([$userId]);
 $upcomingCount = (int) $upcomingStmt->fetchColumn();
@@ -18,7 +18,7 @@ $upcomingCount = (int) $upcomingStmt->fetchColumn();
 // Past events
 $pastCount = $totalEvents - $upcomingCount;
 
-// Next 5 upcoming events
+// Next 5 upcoming events, soonest first
 $nextStmt = $pdo->prepare(
     'SELECT id, title, event_date, location
      FROM events
