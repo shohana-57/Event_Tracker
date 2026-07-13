@@ -15,6 +15,7 @@
 
 <main class="dashboard">
     <h1>Dashboard</h1>
+    <p>Welcome back, User.</p>
     <section class="dashboard-stats">
      <div class="stat-card">
         <span class="stat-number">0</span>
@@ -45,6 +46,10 @@
         You haven't added any events yet.
     </p>
 </section>
+<div class="dashboard-actions">
+    <a href="#" class="btn btn-secondary">View All Events</a>
+    <a href="#" class="btn btn-primary">+ New Event</a>
+</div>
 </main>
 
 </body>

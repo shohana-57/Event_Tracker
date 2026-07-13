@@ -137,3 +137,25 @@ h1, h2 {
     margin-top: 8px;
     color: #6b7280;
 }
+.dashboard-section {
+    background: #ffffff;
+    padding: 20px;
+    margin-top: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.empty-state {
+    color: #6b7280;
+}
+
+.dashboard-actions {
+    margin-top: 30px;
+    display: flex;
+    gap: 15px;
+}
+
+.btn-secondary {
+    background-color: #6b7280;
+    color: white;
+}
