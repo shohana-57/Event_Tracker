@@ -18,24 +18,24 @@ $upcomingCount = (int) $upcomingStmt->fetchColumn();
 // Past events
 $pastCount = $totalEvents - $upcomingCount;
 
-// Next 5 upcoming events, soonest first
+// Next 6 upcoming events, soonest first
 $nextStmt = $pdo->prepare(
     'SELECT id, title, event_date, location
      FROM events
      WHERE user_id = ? AND event_date >= CURDATE()
      ORDER BY event_date ASC
-     LIMIT 5'
+     LIMIT 6'
 );
 $nextStmt->execute([$userId]);
 $upcomingEvents = $nextStmt->fetchAll();
 
-// 5 most recently added events
+// 6 most recently added events listing
 $recentStmt = $pdo->prepare(
     'SELECT id, title, event_date, created_at
      FROM events
      WHERE user_id = ?
      ORDER BY created_at DESC
-     LIMIT 5'
+     LIMIT 6'
 );
 $recentStmt->execute([$userId]);
 $recentlyAdded = $recentStmt->fetchAll();
