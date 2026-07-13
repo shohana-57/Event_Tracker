@@ -109,6 +109,7 @@ require_once __DIR__ . '/includes/header.php';
     <?php endif; ?>
 </section>
 
+
 <a href="events/list.php" class="btn btn-secondary">View All Events</a>
 <a href="events/create.php" class="btn btn-primary">+ New Event</a>
 
