@@ -114,3 +114,4 @@ require_once __DIR__ . '/includes/header.php';
 <a href="events/create.php" class="btn btn-primary">+ New Event</a>
 
 <?php require_once __DIR__ . '/includes/footer.php'; ?>
+<?php require_once __DIR__ . '/includes/footer.php'; ?>
