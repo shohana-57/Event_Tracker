@@ -47,6 +47,7 @@ require_once __DIR__ . '/includes/header.php';
 // Dashboard page
 ?>
 
+
 <h1>Dashboard</h1>
 <p>Welcome back, <?php echo htmlspecialchars($_SESSION['user_name']); ?>.</p>
 
@@ -108,7 +109,9 @@ require_once __DIR__ . '/includes/header.php';
     <?php endif; ?>
 </section>
 
+
 <a href="events/list.php" class="btn btn-secondary">View All Events</a>
 <a href="events/create.php" class="btn btn-primary">+ New Event</a>
 
+<?php require_once __DIR__ . '/includes/footer.php'; ?>
 <?php require_once __DIR__ . '/includes/footer.php'; ?>

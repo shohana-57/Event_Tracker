@@ -143,7 +143,7 @@ h1, h2 {
     display: block;
     font-size: 2rem;
     font-weight: bold;
-    color: #2563eb;
+    color: #0c3da7;
 }
 
 .stat-label {
@@ -165,7 +165,7 @@ h1, h2 {
 }
 
 .empty-state {
-    color: #6b7280;
+    color: #6c7484;
 }
 
 .event-summary-list {
@@ -180,6 +180,7 @@ h1, h2 {
 }
 
 .event-summary-list li:last-child {
+    
     border-bottom: none;
 }
 
