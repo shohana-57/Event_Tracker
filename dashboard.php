@@ -38,6 +38,13 @@
         No upcoming events.
      </p>
     </section>
+    <section class="dashboard-section">
+    <h2>Recently Added</h2>
+
+    <p class="empty-state">
+        You haven't added any events yet.
+    </p>
+</section>
 </main>
 
 </body>
