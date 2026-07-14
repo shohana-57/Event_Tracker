@@ -91,13 +91,24 @@ require_once __DIR__ . '/includes/header.php';
 
 <section class="dashboard-section">
     <h2>Recently Added</h2>
-
     <?php if (empty($recentlyAdded)): ?>
         <p class="empty-state">You haven't added any events yet.</p>
     <?php else: ?>
-
+        <ul class="event-summary-list">
+            <?php foreach ($recentlyAdded as $event): ?>
+                <li>
+                    <a href="events/view.php?id=<?php echo (int) $event['id']; ?>">
+                        <?php echo htmlspecialchars($event['title']); ?>
+                    </a>
+                    <span class="event-meta">
+                        <?php echo date('d M Y', strtotime($event['event_date'])); ?>
+                    </span>
+                </li>
+            <?php endforeach; ?>
+        </ul>
     <?php endif; ?>
 </section>
+
 
 <a href="events/list.php" class="btn btn-secondary">View All Events</a>
 <a href="events/create.php" class="btn btn-primary">+ New Event</a>
