@@ -91,6 +91,12 @@ require_once __DIR__ . '/includes/header.php';
 
 <section class="dashboard-section">
     <h2>Recently Added</h2>
+
+    <?php if (empty($recentlyAdded)): ?>
+        <p class="empty-state">You haven't added any events yet.</p>
+    <?php else: ?>
+
+    <?php endif; ?>
 </section>
 
 <a href="events/list.php" class="btn btn-secondary">View All Events</a>
