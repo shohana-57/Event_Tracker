@@ -1,4 +1,15 @@
 <?php
+require_once __DIR__ . '/../includes/auth_check.php';
+require_once __DIR__ . '/../config/db.php';
+
+$userId = $_SESSION['user_id'];
+
+$errors = [];
+$title = '';
+$eventDate = '';
+$location = '';
+$description = '';
+
 // Validation
 if ($title === '') {
     $errors[] = 'Title is required.';
@@ -15,3 +26,30 @@ if ($eventDate === '') {
     }
 }
 ?>
+
+<form method="POST" action="create.php" id="event-form" novalidate>
+    <div class="form-group">
+        <label for="title">Title *</label>
+        <input type="text" id="title" name="title" maxlength="150"
+               required autofocus>
+    </div>
+
+    <div class="form-group">
+        <label for="event_date">Date *</label>
+        <input type="date" id="event_date" name="event_date"
+               required>
+    </div>
+
+    <div class="form-group">
+        <label for="location">Location</label>
+        <input type="text" id="location" name="location" maxlength="150">
+    </div>
+
+    <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description" name="description" rows="4"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save Event</button>
+    <a href="list.php" class="btn btn-secondary">Cancel</a>
+</form>
