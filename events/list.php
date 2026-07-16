@@ -11,4 +11,10 @@ $stmt = $pdo->prepare(
 );
 $stmt->execute([$userId]);
 $events = $stmt->fetchAll();
+
+$justCreated = isset($_GET['created']);
+$justUpdated = isset($_GET['updated']);
+$justDeleted = isset($_GET['deleted']);
+require_once __DIR__ . '/../includes/header.php';
+require_once __DIR__ . '/../includes/footer.php';
 ?>
