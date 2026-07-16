@@ -41,6 +41,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                  VALUES (?, ?, ?, ?, ?, NOW())'
             );
             $stmt->execute([$userId, $title, $eventDate, $location ?: null, $description ?: null]);
+            header('Location: list.php?created=1');
+            exit;
+
+        } catch(PDOException $e){
+            $errors[] = 'Could not save the event.';
+            error_log($e->getMessage());
         }
     }
 }
