@@ -23,3 +23,11 @@ require_once __DIR__ . '/../includes/footer.php';
     <h1>My Events</h1>
     <a href="create.php" class="btn btn-primary">+ New Event</a>
 </div>
+
+<?php if ($justCreated): ?>
+    <div class="alert alert-success"><p>Event created successfully.</p></div>
+<?php elseif ($justUpdated): ?>
+    <div class="alert alert-success"><p>Event updated successfully.</p></div>
+<?php elseif ($justDeleted): ?>
+    <div class="alert alert-success"><p>Event deleted.</p></div>
+<?php endif; ?>
