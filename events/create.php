@@ -20,21 +20,25 @@ if ($eventDate === '') {
     <div class="form-group">
         <label for="title">Title *</label>
         <input type="text" id="title" name="title" maxlength="150"
-               value="<?php echo htmlspecialchars($title); ?>" required autofocus>
+               required autofocus>
     </div>
 
     <div class="form-group">
         <label for="event_date">Date *</label>
         <input type="date" id="event_date" name="event_date"
-               value="<?php echo htmlspecialchars($eventDate); ?>" required>
+               required>
     </div>
-        <div class="form-group">
+
+    <div class="form-group">
         <label for="location">Location</label>
-        <input type="text" id="location" name="location" maxlength="150"
-               value="<?php echo htmlspecialchars($location); ?>">
+        <input type="text" id="location" name="location" maxlength="150">
     </div>
 
     <div class="form-group">
         <label for="description">Description</label>
-        <textarea id="description" name="description" rows="4"><?php echo htmlspecialchars($description); ?></textarea>
+        <textarea id="description" name="description" rows="4"></textarea>
     </div>
+
+    <button type="submit" class="btn btn-primary">Save Event</button>
+    <a href="list.php" class="btn btn-secondary">Cancel</a>
+</form>
