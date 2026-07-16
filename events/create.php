@@ -15,3 +15,16 @@ if ($eventDate === '') {
     }
 }
 ?>
+
+<form method="POST" action="create.php" id="event-form" novalidate>
+    <div class="form-group">
+        <label for="title">Title *</label>
+        <input type="text" id="title" name="title" maxlength="150"
+               value="<?php echo htmlspecialchars($title); ?>" required autofocus>
+    </div>
+
+    <div class="form-group">
+        <label for="event_date">Date *</label>
+        <input type="date" id="event_date" name="event_date"
+               value="<?php echo htmlspecialchars($eventDate); ?>" required>
+    </div>
