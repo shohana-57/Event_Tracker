@@ -10,46 +10,86 @@ $eventDate = '';
 $location = '';
 $description = '';
 
-// Validation
-if ($title === '') {
-    $errors[] = 'Title is required.';
-} elseif (strlen($title) > 150) {
-    $errors[] = 'Title must be 150 characters or fewer.';
-}
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-if ($eventDate === '') {
-    $errors[] = 'Event date is required.';
-} else {
-    $dateObj = DateTime::createFromFormat('Y-m-d', $eventDate);
-    if (!$dateObj || $dateObj->format('Y-m-d') !== $eventDate) {
-        $errors[] = 'Event date must be a valid date (YYYY-MM-DD).';
+    $title = trim($_POST['title'] ?? '');
+    $eventDate = trim($_POST['event_date'] ?? '');
+    $location = trim($_POST['location'] ?? '');
+    $description = trim($_POST['description'] ?? '');
+    
+    // Validation
+    if ($title === '') {
+        $errors[] = 'Title is required.';
+    } elseif (strlen($title) > 150) {
+        $errors[] = 'Title must be 150 characters or fewer.';
+    }
+
+    if ($eventDate === '') {
+        $errors[] = 'Event date is required.';
+    } else {
+        $dateObj = DateTime::createFromFormat('Y-m-d', $eventDate);
+        if (!$dateObj || $dateObj->format('Y-m-d') !== $eventDate) {
+            $errors[] = 'Event date must be a valid date (YYYY-MM-DD).';
+        }
+    }
+    
+
+    if (empty($errors)) {
+        try {
+            $stmt = $pdo->prepare(
+                'INSERT INTO events (user_id, title, event_date, location, description, created_at)
+                 VALUES (?, ?, ?, ?, ?, NOW())'
+            );
+            $stmt->execute([$userId, $title, $eventDate, $location ?: null, $description ?: null]);
+            header('Location: list.php?created=1');
+            exit;
+
+        } catch(PDOException $e){
+            $errors[] = 'Could not save the event.';
+            error_log($e->getMessage());
+        }
     }
 }
+require_once __DIR__ . '/../includes/header.php';
+
 ?>
+
+<h1>New Event</h1>
+
+<?php if (!empty($errors)): ?>
+    <div class="alert alert-error">
+        <?php foreach ($errors as $error): ?>
+            <p><?php echo htmlspecialchars($error); ?></p>
+        <?php endforeach; ?>
+    </div>
+<?php endif; ?>
+
 
 <form method="POST" action="create.php" id="event-form" novalidate>
     <div class="form-group">
         <label for="title">Title *</label>
-        <input type="text" id="title" name="title" maxlength="150"
-               required autofocus>
+        <input type="text" id="title" name="title" maxlength="150" 
+                value="<?php echo htmlspecialchars($title); ?>" required autofocus>
     </div>
 
     <div class="form-group">
         <label for="event_date">Date *</label>
-        <input type="date" id="event_date" name="event_date"
-               required>
+        <input type="date" id="event_date" name="event_date" 
+               value="<?php echo htmlspecialchars($eventDate); ?>" required>
     </div>
 
     <div class="form-group">
         <label for="location">Location</label>
-        <input type="text" id="location" name="location" maxlength="150">
+        <input type="text" id="location" name="location" maxlength="150" 
+               value="<?php echo htmlspecialchars($location); ?>">
     </div>
 
     <div class="form-group">
         <label for="description">Description</label>
-        <textarea id="description" name="description" rows="4"></textarea>
+        <textarea id="description" name="description" rows="4"><?php echo htmlspecialchars($description); ?></textarea>
     </div>
 
     <button type="submit" class="btn btn-primary">Save Event</button>
     <a href="list.php" class="btn btn-secondary">Cancel</a>
 </form>
+<?php require_once __DIR__ . '/../includes/footer.php'; ?>
