@@ -31,3 +31,9 @@ require_once __DIR__ . '/../includes/footer.php';
 <?php elseif ($justDeleted): ?>
     <div class="alert alert-success"><p>Event deleted.</p></div>
 <?php endif; ?>
+
+<form method="GET" action="search.php" class="search-bar">
+    <label for="search_date" class="sr-only">Filter by date</label>
+    <input type="date" id="search_date" name="date">
+    <button type="submit" class="btn btn-secondary">Search by Date</button>
+</form>
