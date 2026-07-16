@@ -1,3 +1,35 @@
+<?php
+// events/search.php
+// US-13: As a user, I want to search/filter events by date so I can find relevant events quickly
+
+require_once __DIR__ . '/../includes/auth_check.php'; // must run before any output
+require_once __DIR__ . '/../config/db.php';
+
+$userId = $_SESSION['user_id'];
+
+$searchDate = trim($_GET['date'] ?? '');
+$events = [];
+$dateError = '';
+
+if ($searchDate !== '') {
+    $dateObj = DateTime::createFromFormat('Y-m-d', $searchDate);
+    if (!$dateObj || $dateObj->format('Y-m-d') !== $searchDate) {
+        $dateError = 'Please enter a valid date.';
+    } else {
+        $stmt = $pdo->prepare(
+            'SELECT id, title, event_date, location
+             FROM events
+             WHERE user_id = ? AND event_date = ?
+             ORDER BY title ASC'
+        );
+        $stmt->execute([$userId, $searchDate]);
+        $events = $stmt->fetchAll();
+    }
+}
+
+require_once __DIR__ . '/../includes/header.php';
+?>
+
 <div class="page-header-row">
     <h1>Search Events</h1>
     <a href="create.php" class="btn btn-primary">+ New Event</a>
@@ -55,3 +87,7 @@
         </tbody>
     </table>
 <?php endif; ?>
+
+<a href="list.php" class="btn btn-secondary">&larr; Back to All Events</a>
+
+<?php require_once __DIR__ . '/../includes/footer.php'; ?>
