@@ -10,19 +10,27 @@ $eventDate = '';
 $location = '';
 $description = '';
 
-// Validation
-if ($title === '') {
-    $errors[] = 'Title is required.';
-} elseif (strlen($title) > 150) {
-    $errors[] = 'Title must be 150 characters or fewer.';
-}
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-if ($eventDate === '') {
-    $errors[] = 'Event date is required.';
-} else {
-    $dateObj = DateTime::createFromFormat('Y-m-d', $eventDate);
-    if (!$dateObj || $dateObj->format('Y-m-d') !== $eventDate) {
-        $errors[] = 'Event date must be a valid date (YYYY-MM-DD).';
+    $title = trim($_POST['title'] ?? '');
+    $eventDate = trim($_POST['event_date'] ?? '');
+    $location = trim($_POST['location'] ?? '');
+    $description = trim($_POST['description'] ?? '');
+    
+    // Validation
+    if ($title === '') {
+        $errors[] = 'Title is required.';
+    } elseif (strlen($title) > 150) {
+        $errors[] = 'Title must be 150 characters or fewer.';
+    }
+
+    if ($eventDate === '') {
+        $errors[] = 'Event date is required.';
+    } else {
+        $dateObj = DateTime::createFromFormat('Y-m-d', $eventDate);
+        if (!$dateObj || $dateObj->format('Y-m-d') !== $eventDate) {
+            $errors[] = 'Event date must be a valid date (YYYY-MM-DD).';
+        }
     }
 }
 ?>
