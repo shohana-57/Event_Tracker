@@ -32,6 +32,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errors[] = 'Event date must be a valid date (YYYY-MM-DD).';
         }
     }
+    
+
+    if (empty($errors)) {
+        try {
+            $stmt = $pdo->prepare(
+                'INSERT INTO events (user_id, title, event_date, location, description, created_at)
+                 VALUES (?, ?, ?, ?, ?, NOW())'
+            );
+            $stmt->execute([$userId, $title, $eventDate, $location ?: null, $description ?: null]);
+        }
+    }
 }
 ?>
 
