@@ -12,3 +12,9 @@
         <a href="search.php" class="btn-clear">Clear</a>
     <?php endif; ?>
 </form>
+
+<?php if ($searchDate === ''): ?>
+    <p class="empty-state">
+        Pick a date above to see events on that day.
+    </p>
+<?php endif; ?>
