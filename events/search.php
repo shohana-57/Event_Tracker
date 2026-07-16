@@ -28,3 +28,20 @@
         Pick a date above to see events on that day.
     </p>
 <?php endif; ?>
+<?php elseif (empty($events)): ?>
+    <p class="empty-state">
+        No events found on
+        <?php echo date('d M Y', strtotime($searchDate)); ?>.
+        <a href="create.php?event_date=<?php echo urlencode($searchDate); ?>">
+            Create one
+        </a>.
+    </p>
+    <?php else: ?>
+
+<p class="results-summary">
+    <?php echo count($events); ?>
+    event(s) on
+    <?php echo date('d M Y', strtotime($searchDate)); ?>
+</p>
+
+<?php endif; ?>
