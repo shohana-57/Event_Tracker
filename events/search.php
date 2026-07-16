@@ -18,3 +18,13 @@
         Pick a date above to see events on that day.
     </p>
 <?php endif; ?>
+<?php if ($dateError !== ''): ?>
+    <div class="alert alert-error">
+        <p><?php echo htmlspecialchars($dateError); ?></p>
+    </div>
+
+<?php elseif ($searchDate === ''): ?>
+    <p class="empty-state">
+        Pick a date above to see events on that day.
+    </p>
+<?php endif; ?>
