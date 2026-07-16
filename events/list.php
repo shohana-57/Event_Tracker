@@ -18,3 +18,8 @@ $justDeleted = isset($_GET['deleted']);
 require_once __DIR__ . '/../includes/header.php';
 require_once __DIR__ . '/../includes/footer.php';
 ?>
+
+<div class="page-header-row">
+    <h1>My Events</h1>
+    <a href="create.php" class="btn btn-primary">+ New Event</a>
+</div>
