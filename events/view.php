@@ -46,6 +46,15 @@ require_once __DIR__ . '/../includes/header.php';
     <dt>Description</dt>
     <dd><?php echo nl2br(htmlspecialchars($event['description'] ?: 'No description provided.')); ?></dd>
 
+    <dt>Created</dt>
+    <dd><?php echo date('d M Y, g:i A', strtotime($event['created_at'])); ?></dd>
+
+    <?php if ($event['updated_at'] !== $event['created_at']): ?>
+        <dt>Last Updated</dt>
+        <dd><?php echo date('d M Y, g:i A', strtotime($event['updated_at'])); ?></dd>
+    <?php endif; ?>
+</dl>
+
 
 
 <?php require_once __DIR__ . '/../includes/footer.php'; ?>
