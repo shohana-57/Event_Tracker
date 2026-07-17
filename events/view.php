@@ -55,6 +55,5 @@ require_once __DIR__ . '/../includes/header.php';
     <?php endif; ?>
 </dl>
 
-
-
+<a href="list.php" class="btn btn-secondary">&larr; Back to My Events</a>
 <?php require_once __DIR__ . '/../includes/footer.php'; ?>
