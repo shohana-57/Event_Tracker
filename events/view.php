@@ -24,6 +24,10 @@ if (!$event) {
 require_once __DIR__ . '/../includes/header.php';
 ?>
 
+<div class="page-header-row">
+    <h1><?php echo htmlspecialchars($event['title']); ?></h1>
+    <div class="actions-cell">
+        <a href="edit.php?id=<?php echo (int) $event['id']; ?>" class="btn btn-secondary">Edit</a>
 
 
 <?php require_once __DIR__ . '/../includes/footer.php'; ?>
