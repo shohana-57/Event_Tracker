@@ -16,4 +16,14 @@ $stmt = $pdo->prepare(
 );
 $stmt->execute([$eventId, $userId]);
 $event = $stmt->fetch();
+if (!$event) {
+    header('Location: list.php?notfound=1');
+    exit;
+}
+
+require_once __DIR__ . '/../includes/header.php';
 ?>
+
+
+
+<?php require_once __DIR__ . '/../includes/footer.php'; ?>
