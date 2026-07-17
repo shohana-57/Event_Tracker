@@ -7,4 +7,13 @@ if (!$eventId) {
     header('Location: list.php');
     exit;
 }
+
+$stmt = $pdo->prepare(
+    'SELECT id, title, event_date, location, description, created_at, updated_at
+     FROM events
+     WHERE id = ? AND user_id = ?
+     LIMIT 1'
+);
+$stmt->execute([$eventId, $userId]);
+$event = $stmt->fetch();
 ?>
