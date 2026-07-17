@@ -28,6 +28,24 @@ require_once __DIR__ . '/../includes/header.php';
     <h1><?php echo htmlspecialchars($event['title']); ?></h1>
     <div class="actions-cell">
         <a href="edit.php?id=<?php echo (int) $event['id']; ?>" class="btn btn-secondary">Edit</a>
+        <form method="POST" action="delete.php" class="inline-form"
+              data-confirm="Delete '<?php echo htmlspecialchars($event['title'], ENT_QUOTES); ?>'? This cannot be undone.">
+            <input type="hidden" name="id" value="<?php echo (int) $event['id']; ?>">
+            <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+    </div>
+</div>
+
+<dl class="event-details">
+    <dt>Date</dt>
+    <dd><?php echo date('l, d F Y', strtotime($event['event_date'])); ?></dd>
+
+    <dt>Location</dt>
+    <dd><?php echo htmlspecialchars($event['location'] ?: 'Not specified'); ?></dd>
+
+    <dt>Description</dt>
+    <dd><?php echo nl2br(htmlspecialchars($event['description'] ?: 'No description provided.')); ?></dd>
+
 
 
 <?php require_once __DIR__ . '/../includes/footer.php'; ?>
