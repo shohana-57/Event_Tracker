@@ -84,3 +84,20 @@ require_once __DIR__ . '/../includes/header.php';
         <?php endforeach; ?>
     </div>
 <?php endif; ?>
+<form method="POST" action="edit.php?id=<?php echo (int) $eventId; ?>" id="event-form" novalidate>
+    <input type="hidden" name="id" value="<?php echo (int) $eventId; ?>">
+
+    <div class="form-group">
+        <label for="title">Title *</label>
+        <input type="text" id="title" name="title" maxlength="150"
+               value="<?php echo htmlspecialchars($title); ?>" required autofocus>
+    </div>
+
+    <div class="form-group">
+        <label for="event_date">Date *</label>
+        <input type="date" id="event_date" name="event_date"
+               value="<?php echo htmlspecialchars($eventDate); ?>" required>
+    </div>
+
+  
+</form>
