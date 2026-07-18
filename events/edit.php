@@ -99,5 +99,16 @@ require_once __DIR__ . '/../includes/header.php';
                value="<?php echo htmlspecialchars($eventDate); ?>" required>
     </div>
 
-  
+    <div class="form-group">
+        <label for="location">Location</label>
+        <input type="text" id="location" name="location" maxlength="150"
+               value="<?php echo htmlspecialchars($location ?? ''); ?>">
+    </div>
+
+    <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description" name="description" rows="4"><?php echo htmlspecialchars($description ?? ''); ?></textarea>
+    </div>
+
+
 </form>
