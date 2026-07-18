@@ -1,6 +1,8 @@
 <?php
+// events/edit.php
+// US-11: As a user, I want to edit an existing event so I can update its details
 
-require_once __DIR__ . '/../includes/auth_check.php'; 
+require_once __DIR__ . '/../includes/auth_check.php'; // must run before any output
 require_once __DIR__ . '/../config/db.php';
 
 $userId = $_SESSION['user_id'];
@@ -11,6 +13,8 @@ if (!$eventId) {
     exit;
 }
 
+// Ownership check baked into the query: user_id = ? ensures
+// nobody can edit another user's event by guessing an id.
 $stmt = $pdo->prepare('SELECT * FROM events WHERE id = ? AND user_id = ? LIMIT 1');
 $stmt->execute([$eventId, $userId]);
 $event = $stmt->fetch();
@@ -75,6 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 require_once __DIR__ . '/../includes/header.php';
 ?>
+
 <h1>Edit Event</h1>
 
 <?php if (!empty($errors)): ?>
@@ -84,6 +89,7 @@ require_once __DIR__ . '/../includes/header.php';
         <?php endforeach; ?>
     </div>
 <?php endif; ?>
+
 <form method="POST" action="edit.php?id=<?php echo (int) $eventId; ?>" id="event-form" novalidate>
     <input type="hidden" name="id" value="<?php echo (int) $eventId; ?>">
 
@@ -110,5 +116,8 @@ require_once __DIR__ . '/../includes/header.php';
         <textarea id="description" name="description" rows="4"><?php echo htmlspecialchars($description ?? ''); ?></textarea>
     </div>
 
-
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+    <a href="view.php?id=<?php echo (int) $eventId; ?>" class="btn btn-secondary">Cancel</a>
 </form>
+
+<?php require_once __DIR__ . '/../includes/footer.php'; ?>
