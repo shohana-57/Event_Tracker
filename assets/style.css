@@ -262,7 +262,7 @@ h1, h2 {
     text-align: center;
     color: #6b7280;
 }
-/* ---------- Events table ---------- */
+/*Events table*/
 .events-table {
     width: 100%;
     border-collapse: collapse;
@@ -351,3 +351,32 @@ textarea {
     resize: vertical;
 }
 
+/*Additional Buttons*/
+.btn-danger {
+    background-color: #dc2626;
+    color: #ffffff;
+}
+
+.btn-clear {
+    font-size: 0.85rem;
+    color: #6b7280;
+    align-self: center;
+}
+
+.link-button {
+    background: none;
+    border: none;
+    color: #dc2626;
+    cursor: pointer;
+    font-size: 0.9rem;
+    padding: 0;
+    font-family: inherit;
+}
+
+.link-button:hover {
+    text-decoration: underline;
+}
+
+.inline-form {
+    display: inline;
+}
