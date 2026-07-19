@@ -297,3 +297,29 @@ h1, h2 {
     align-items: center;
     flex-wrap: wrap;
 }
+
+/*Accessibility*/
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+
+/*Navigation*/
+.nav-logout {
+    color: #f87171 !important;
+}
+
+/*Page Header*/
+.page-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
