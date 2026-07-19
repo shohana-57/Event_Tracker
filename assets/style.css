@@ -313,6 +313,20 @@ h1, h2 {
     color: #f87171 !important;
 }
 
+/*Transitions*/
+a,
+button,
+.btn,
+input,
+textarea {
+    transition: all 0.2s ease;
+}
+
+/*hover effects for table rows*/
+.events-table tbody tr:hover {
+    background: #f9fafb;
+}
+
 /*Page Header*/
 .page-header-row {
     display: flex;
@@ -379,4 +393,59 @@ textarea {
 
 .inline-form {
     display: inline;
+}
+
+/*Dashboard*/
+.event-meta {
+    font-size: 0.85rem;
+    color: #6b7280;
+}
+
+/*Search Bar*/
+.search-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.search-bar input[type="date"] {
+    padding: 9px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 0.9rem;
+}
+
+.results-summary {
+    color: #6b7280;
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+}
+
+/*Event Details*/
+.event-details {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 20px 24px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    margin-bottom: 20px;
+}
+
+.event-details dt {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: #9ca3af;
+    margin-top: 14px;
+}
+
+.event-details dt:first-child {
+    margin-top: 0;
+}
+
+.event-details dd {
+    margin: 4px 0 0 0;
+    font-size: 1rem;
+    color: #1f2937;
 }
