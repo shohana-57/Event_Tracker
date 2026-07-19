@@ -449,3 +449,102 @@ textarea {
     font-size: 1rem;
     color: #1f2937;
 }
+
+/*Disabled Buttons*/
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/*focus-visible for accessibility*/
+.btn:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+a:focus-visible {
+    outline: 2px solid #2563eb;
+    outline-offset: 2px;
+}
+
+/*Responsive*/
+@media (max-width: 600px) {
+
+    /* Navigation */
+    .nav-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .site-nav {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        gap: 10px;
+    }
+
+    /* Dashboard */
+    .dashboard-stats {
+        flex-direction: column;
+    }
+
+    .dashboard-actions {
+        flex-direction: column;
+    }
+
+    .stat-card {
+        width: 100%;
+    }
+
+    /* Page header */
+    .page-header-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    /* Search */
+    .search-bar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .search-bar input,
+    .search-bar button {
+        width: 100%;
+    }
+
+    /* Forms */
+    .form-group input,
+    .form-group textarea,
+    .btn {
+        width: 100%;
+    }
+
+    /* Event table */
+    .events-table thead {
+        display: none;
+    }
+
+    .events-table,
+    .events-table tbody,
+    .events-table tr,
+    .events-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .events-table tr {
+        margin-bottom: 12px;
+        border-bottom: 2px solid #e5e7eb;
+    }
+
+    .events-table td {
+        border-bottom: none;
+        padding: 6px 16px;
+    }
+
+    .actions-cell {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+}
