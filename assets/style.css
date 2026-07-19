@@ -548,3 +548,18 @@ a:focus-visible {
         gap: 8px;
     }
 }
+/* Event details */
+    .event-details {
+        padding: 16px;
+    }
+
+    /* Auth pages */
+    .auth-container {
+        margin: 20px;
+        padding: 24px;
+    }
+
+    /* Main content */
+    .site-main {
+        padding: 16px;
+    }
